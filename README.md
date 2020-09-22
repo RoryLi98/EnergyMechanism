@@ -10,18 +10,17 @@ Qmake Setting：
                  
     LIBS += `pkg-config opencv --cflags --libs`
 
-[Tab]SOURCES += main.cpp \
-[Tab]   RMVideoCapture.cpp \
-[Tab]   energy_agency.cpp \
-[Tab]   energy_agency_thread.cpp \
-[Tab]   function_tool.cpp \
-[Tab]   AngleSolver.cpp
-
-HEADERS += \
-    RMVideoCapture.hpp \
-    energy_agency.h \
-    energy_agency_thread.h \
-    AngleSolver.h \
-    header.h
+    SOURCES += main.cpp \
+               RMVideoCapture.cpp \
+               energy_agency.cpp \
+               energy_agency_thread.cpp \
+               function_tool.cpp \
+               AngleSolver.cpp
+                 
+    LHEADERS += RMVideoCapture.hpp \
+                energy_agency.h \
+                energy_agency_thread.h \
+                AngleSolver.h \
+                header.h
 
 
