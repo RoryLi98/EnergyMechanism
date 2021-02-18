@@ -6,21 +6,15 @@ Qmake Setting：
 
     INCLUDEPATH += /usr/local/include \
                    /usr/local/include/opencv \
-                  /usr/local/include/opencv2
-                 
+                   /usr/local/include/opencv2 \
+                   /home/link/linuxSDK_V2.1.0.20/include
+
     LIBS += `pkg-config opencv --cflags --libs`
+    LIBS += /home/link/linuxSDK_V2.1.0.20/lib/x64/libMVSDK.so
 
     SOURCES += main.cpp \
-               RMVideoCapture.cpp \
-               energy_agency.cpp \
-               energy_agency_thread.cpp \
-               function_tool.cpp \
-               AngleSolver.cpp
-                 
-    LHEADERS += RMVideoCapture.hpp \
-                energy_agency.h \
-                energy_agency_thread.h \
-                AngleSolver.h \
-                header.h
+               serial.cpp \
+               thread.cpp \
+               energy.cpp
 
-
+大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergyAiming.MP4
