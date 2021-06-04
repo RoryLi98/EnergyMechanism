@@ -1,4 +1,4 @@
-# EnergyMechanism（进度缓慢，暂未出最终版）
+# EnergyMechanism（第一版表现得较好，效果视频待上传）
 
 <div align=center><img src="https://github.com/LinkLiar/ImageStorage/blob/master/SchoolBadge.png" width="200" height="265"/><img src="https://github.com/LinkLiar/ImageStorage/blob/master/CollegeBadge.png" width="200" height="265"/></div>
 
