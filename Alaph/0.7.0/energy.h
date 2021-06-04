@@ -11,8 +11,16 @@ public:
     EnergyResult Energy_Agency_choose_final_target(vector<Point2f> &circle_center, Mat &src, Mat &mask_bright, vector<Energy_Agency_Rotated_Arm> &rotated_arms, cv::RotatedRect &final_armor, int &rotatedArmsIndex);
     HOGDescriptor *train_hog;
     cv::Ptr<cv::ml::SVM> predict_model;
-
 private:
 };
+
+class timecap
+{
+public:
+    float second = 0;
+    float coefficient = 0;
+private:
+};
+
 
 #endif // ENERGY_H

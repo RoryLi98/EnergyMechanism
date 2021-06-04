@@ -178,13 +178,13 @@ void Image_Thread::Image_Thread_energy()
     int Radius = 151;            //单位：像素
     int CalculateSpeedPer = 2;   //单位：帧数
     int DelayAngle = 30;         //单位：角度
-    int DelayMillisecond = 270;  //单位：毫秒
+    int DelayMillisecond = 420;  //单位：毫秒
     int SmallCounterValue = 500; //单位：帧数
     int k = 1;
     int b = 0;
 
-    int yaw = 33;
-    int pitch = 8;
+    int yaw = 12;
+    int pitch = 45;
 
     int debug = 0;
     int coefficient = 110;
@@ -204,8 +204,8 @@ void Image_Thread::Image_Thread_energy()
     createTrackbar("DelayMillisecond", "Parameter", &DelayMillisecond, 1500, NULL);
     // createTrackbar("k","Parameter",&k,20,NULL);
     // createTrackbar("b","Parameter",&b,30,NULL);
-    createTrackbar("yaw", "Parameter", &yaw, 100, NULL);
-    createTrackbar("pitch", "Parameter", &pitch, 100, NULL);
+    createTrackbar("yaw", "Parameter", &yaw, 200, NULL);
+    createTrackbar("pitch", "Parameter", &pitch,200, NULL);
     createTrackbar("debug", "Parameter", &debug, 1, NULL);
     createTrackbar("coefficient", "Parameter", &coefficient, 200, NULL);
     createTrackbar("Red_Color", "Parameter", &Red_Color, 200, NULL);
@@ -230,14 +230,13 @@ void Image_Thread::Image_Thread_energy()
     float Oldsecond = 0;
     float Oldrad = 0;
     bool BigCalibrationFlag = 0;
-
-    float BigCalibrateOldTime = 0;
     float TimeNow;
     float OldTimeNow;
     vector<float> CaliDirectionList;
 
     int Clockwise = -10; //0未确定 1顺 2逆
     Energy_Agency ee;
+    vector<timecap> Calibration;
     while (true)
     {
 
@@ -387,10 +386,15 @@ void Image_Thread::Image_Thread_energy()
                         if (!isnan(TimeNow))
                         {
                             //cout << "TimeNow: " << TimeNow << endl;
-                            if (abs(TimeNow) > 0.7)
-                            cout << "coefficent: " << 0.83375 / TimeNow << endl;
+                            if (abs(TimeNow) > 0.60)
+                            {
+                                cout << "coefficent: " << 0.83375 / TimeNow << endl;
+                                timecap temp;
+                                temp.coefficient = 0.83375 / TimeNow;
+                                temp.second = second;
+                                Calibration.push_back(temp);
+                            }
                         }
-
                         else
                         {
                             Oldrad = rad;
@@ -399,34 +403,40 @@ void Image_Thread::Image_Thread_energy()
                             continue;
                         }
 
-                        // TimeNow = TimeNow * coefficient / 100.0;
-                        if ((TimeNow * coefficient / 100.0) < -0.82 && BigCalibrateOldTime != 0)
-                        //if ((TimeNow * coefficient / 100.0) > 0.82 && BigCalibrateOldTime != 0)
-                        {
-                            cout<<"=========================="<<endl;
-                            BigCalibrationFlag = 1;
-                            start = int(second * 1000) % 3335 / 1000.0;
-//                            if (rad < BigCalibrateOldTime)
-//                                mark = TimeNow + 1.667;
-//                            else
-//                                mark = TimeNow;
-//                            if (TimeNow>0)
-//                                mark = TimeNow + 1.667;
-//                            else
-//                                mark = TimeNow;
-
-
-                        }
-
-                        if (BigCounter % (3 * CalculateSpeedPer) == 0)
-                            BigCalibrateOldTime = TimeNow;
-
                         Oldrad = rad;
                         Oldsecond = second;
                         OldTimeNow = TimeNow;
+
+                        if (Calibration.size()>10&&BigCalibrationFlag == 0)
+                        {
+                            sort(Calibration.begin(),Calibration.end(),[](timecap a,timecap b){return abs(a.coefficient)<abs(b.coefficient);});
+                            //cout<<"CCCCCCCCCCCCCCCCCCCCCCCC = "<<Calibration[0].coefficient<<endl;
+
+                            if(abs(Calibration[0].coefficient)<2)
+                            {
+
+                                float biassecond;
+                                if(second>Calibration[0].second)
+                                    biassecond = second-Calibration[0].second;
+                                else if(second<Calibration[0].second)
+                                    biassecond = second+60-Calibration[0].second;
+
+                                if(Calibration[0].coefficient>0)
+                                    mark = 0.83375+biassecond;
+                                else if(Calibration[0].coefficient<0)
+                                    mark = -0.83375+3.335+biassecond;
+
+                                start = int(second * 1000) % 3335 / 1000.0;
+                                BigCalibrationFlag = 1;
+
+                            }
+
+                        }
+
+
                     }
                 }
-                now = int(second * 1000) % 3335 / 1000.0;
+                now = int(second * 1000) % 3335 / 1000.0;//周期计时器
 
                 if (BigCalibrationFlag == 1 && Clockwise > 0)
                 {
@@ -443,7 +453,7 @@ void Image_Thread::Image_Thread_energy()
                     }
                     if (Clockwise == 2)
                     {
-                        guessnow += 1.667;
+//                        guessnow += 1.667;    //=================================UNTESTED
                         angle = -(((250 * cos((471 * (guessnow + DelayMillisecond / 1000.0)) / 250) - 783 * (guessnow + DelayMillisecond / 1000.0)) / 600 + 25 / 60) * 180 / CV_PI - ((250 * cos((471 * (guessnow)) / 250) - 783 * (guessnow)) / 600 + 25 / 60) * 180 / CV_PI);
                         //cout<<"大能量 逆时针"<<endl;
                     }
@@ -451,6 +461,7 @@ void Image_Thread::Image_Thread_energy()
                         ShootTime = 1; //自动击打
                     else
                         ShootTime = 0;
+                    //cout<<"ACTION"<<endl;
                     Prediction = getRotatePoint(src, detect_center.TargetRotatedRect.center, cc, angle); //18 0
                     circle(src, Prediction, 3, Scalar(255, 255, 0), -1);
 
@@ -465,10 +476,11 @@ void Image_Thread::Image_Thread_energy()
             }
         }
         //------------------------------------------------------------------
-        if ((Prediction.x == 1280 / 2) && (Prediction.y == 1024 / 2))
+
+        if (Prediction.x != 0)
         {
             data_send[0].data_float = Prediction.x + yaw - 50;   //Yaw
-            data_send[1].data_float = Prediction.y + pitch - 50; //Pitch
+            data_send[1].data_float = Prediction.y + pitch - 150; //Pitch
         }
         else
         {
@@ -476,8 +488,8 @@ void Image_Thread::Image_Thread_energy()
             data_send[1].data_float = 0; //Pitch
         }
 
-        //        cout<<"// 1:"<<data_send[0].data_float<<endl;       
-        //        cout<<"// 2:"<<data_send[1].data_float<<endl;
+                cout<<"// 1:"<<data_send[0].data_float<<endl;
+                cout<<"// 2:"<<data_send[1].data_float<<endl;
         //        cout<<"// 3:"<<ShootTime<<endl;
 
         sendXYZ(fd2car, data_send, ShootTime, 1, cnt); //发送数据
@@ -488,14 +500,16 @@ void Image_Thread::Image_Thread_energy()
         Size dsize = Size(src.cols * scale, src.rows * scale);
         Mat srcResized = Mat(dsize, CV_32S);
         resize(src, srcResized, dsize);
-        imshow("RESULT", srcResized);
+        //imshow("RESULT", srcResized);
 
         char c = (char)waitKey(1); //x for calibrate s for stop c for continue
         if (c == 27)
             break;
         if (c == 'x') // x
         {
+            Calibration.clear();
             BigCalibrationFlag = 0;
+
         }
     }
 }
