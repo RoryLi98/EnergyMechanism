@@ -1,4 +1,4 @@
-# EnergyMechanism（第一版表现得较好，效果视频待上传）
+# EnergyMechanism（大改后新表现得较好，效果视频待上传）
 
 <div align=center><img src="https://github.com/LinkLiar/ImageStorage/blob/master/SchoolBadge.png" width="200" height="265"/><img src="https://github.com/LinkLiar/ImageStorage/blob/master/CollegeBadge.png" width="200" height="265"/></div>
 
@@ -17,4 +17,5 @@ Qmake Setting：
                thread.cpp \
                energy.cpp
 
-大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergyAiming.MP4
+旧版大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergyAiming.MP4  
+新版大能量瞄准效果：
