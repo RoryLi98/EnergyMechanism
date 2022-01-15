@@ -17,9 +17,9 @@ Qmake Setting：
                thread.cpp \
                energy.cpp
                
-模拟校准程序：/EnergyMechanism/EnergySimulation/
-赛前就绪版本：/EnergyMechanism/tree/master/Alaph/0.7.1(FinalVersion)
+模拟校准程序：/EnergyMechanism/EnergySimulation/  
+赛前就绪版本：/EnergyMechanism/tree/master/Alaph/0.7.1(FinalVersion)  
 旧版大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergyAiming.MP4  
-新版大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/Competition.mp4
-小能量模拟效果：https://github.com/LinkLiar/ImageStorage/blob/master/SmallEnergy.gif
-大能量模拟效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergy.gif
+新版大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/Competition.mp4  
+小能量模拟效果：https://github.com/LinkLiar/ImageStorage/blob/master/SmallEnergy.gif  
+大能量模拟效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergy.gif  
