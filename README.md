@@ -18,4 +18,4 @@ Qmake Setting：
                energy.cpp
 
 旧版大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergyAiming.MP4  
-新版大能量瞄准效果：
+新版大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/Competition.mp4
