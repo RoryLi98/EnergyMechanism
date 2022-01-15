@@ -1,4 +1,4 @@
-# EnergyMechanism（大改后新表现得较好，效果视频待上传）
+# EnergyMechanism
 
 <div align=center><img src="https://github.com/LinkLiar/ImageStorage/blob/master/SchoolBadge.png" width="200" height="265"/><img src="https://github.com/LinkLiar/ImageStorage/blob/master/CollegeBadge.png" width="200" height="265"/></div>
 
@@ -16,6 +16,10 @@ Qmake Setting：
                serial.cpp \
                thread.cpp \
                energy.cpp
-
+               
+模拟校准程序：/EnergyMechanism/EnergySimulation/
+赛前就绪版本：/EnergyMechanism/tree/master/Alaph/0.7.1(FinalVersion)
 旧版大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergyAiming.MP4  
 新版大能量瞄准效果：https://github.com/LinkLiar/ImageStorage/blob/master/Competition.mp4
+小能量模拟效果：https://github.com/LinkLiar/ImageStorage/blob/master/SmallEnergy.gif
+大能量模拟效果：https://github.com/LinkLiar/ImageStorage/blob/master/BigEnergy.gif
