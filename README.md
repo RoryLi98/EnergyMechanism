@@ -17,7 +17,7 @@ Qmake Setting：
                thread.cpp \
                energy.cpp
                
-<div align=center><img src="https://github.com/LinkLiar/ImageStorage/blob/master/%E6%AD%A5%E5%85%B5%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%87%BB%E6%89%93%E8%83%BD%E9%87%8F%E6%9C%BA%E5%85%B3%E8%B0%83%E8%AF%95.png" width="200" height="265"/></div>
+<div align=center><img src="https://github.com/LinkLiar/ImageStorage/blob/master/%E6%AD%A5%E5%85%B5%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%87%BB%E6%89%93%E8%83%BD%E9%87%8F%E6%9C%BA%E5%85%B3%E8%B0%83%E8%AF%95.png"/></div>
 
 模拟校准程序：/EnergyMechanism/EnergySimulation/  
 赛前就绪版本：/EnergyMechanism/tree/master/Alaph/0.7.1(FinalVersion)  
